@@ -13,9 +13,11 @@ for line in contacts_list:
 
   result.append(new_raw.split(','))
 
+# пришлось добавить цикл иначе дубликаты наслаивались из-за непустого значения
 for contact in result:
     if contact[-2] == '+7()-- доб. ':
         contact[-2] = ''
+
 
 
 def remove_duplicates(list_: list) -> list:
