@@ -9,7 +9,7 @@ def sorter(source_path, folder_path):
 
     result = []
     contact_dict = [{item: item for item in contacts_list[0]}]
-    print(contact_dict)
+
 
     pattern = r"([А-Я]\w+).([А-Я]\w+).(([А-Я]\w+)|(,+)),+(([А-Яа-я]\w+)|),+(([^+78,a-zA-Z]+)|)(,+|)((\+7|8)?(\s|)(\(|)" \
               r"((?:\d{1,3}))(\)|)(\D|)((?:\d{1,3}))(\D|)((?:\d{1,2}))(\D|)((?:\d{1,2}))|)(\W|)((\(|)(доб.) (....)(\)|)|)(,|)" \
