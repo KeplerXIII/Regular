@@ -1,3 +1,4 @@
+
 import re
 import csv
 
@@ -8,9 +9,9 @@ with open("phonebook_raw.csv", encoding="utf-8") as f:
 result = []
 dict = [{'lastname': 'lastname', 'firstname': 'firstname', 'surname': 'surname', 'organization': 'organization',
          'position': 'position', 'phone': 'phone', 'email': 'email'}]
-pattern = r"([А-Я]\w+).([А-Я]\w+).(([А-Я]\w+)|(,+)),+(([А-Яа-я]\w+)|),+(([^+78,a-zA-Z]+)|)(,+|)((\+7|8)?(\s|)(\(|)((" \
-          r"?:\d{1,3}))(\)|)(\D|)((?:\d{1,3}))(\D|)((?:\d{1,2}))(\D|)((?:\d{1,2}))|)(\W|)((\(|)доб. (....)(\)|)|)(," \
-          r"|)((\w+(.|)\w+@\w+(.|).\w+(.|))|) "
+
+# Не понял как перенести паттерн регулярного выражения, при переносе ломается
+pattern = r"([А-Я]\w+).([А-Я]\w+).(([А-Я]\w+)|(,+)),+(([А-Яа-я]\w+)|),+(([^+78,a-zA-Z]+)|)(,+|)((\+7|8)?(\s|)(\(|)((?:\d{1,3}))(\)|)(\D|)((?:\d{1,3}))(\D|)((?:\d{1,2}))(\D|)((?:\d{1,2}))|)(\W|)((\(|)доб. (....)(\)|)|)(,|)((\w+(.|)\w+@\w+(.|).\w+(.|))|)"
 
 for line in contacts_list:
     line_text = ",".join(line)
