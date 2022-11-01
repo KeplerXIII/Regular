@@ -8,8 +8,8 @@ def sorter(source_path, folder_path):
         contacts_list = list(rows)
 
     result = []
-    dict = [{'lastname': 'lastname', 'firstname': 'firstname', 'surname': 'surname', 'organization': 'organization',
-             'position': 'position', 'phone': 'phone', 'email': 'email'}]
+    contact_dict = [{item: item for item in contacts_list[0]}]
+    print(contact_dict)
 
     pattern = r"([А-Я]\w+).([А-Я]\w+).(([А-Я]\w+)|(,+)),+(([А-Яа-я]\w+)|),+(([^+78,a-zA-Z]+)|)(,+|)((\+7|8)?(\s|)(\(|)" \
               r"((?:\d{1,3}))(\)|)(\D|)((?:\d{1,3}))(\D|)((?:\d{1,2}))(\D|)((?:\d{1,2}))|)(\W|)((\(|)(доб.) (....)(\)|)|)(,|)" \
@@ -22,7 +22,7 @@ def sorter(source_path, folder_path):
         if new_raw[-2] == '+7()-- доб. ':
             new_raw[-2] = ''
 
-        for contact in dict:
+        for contact in contact_dict:
             if new_raw[0] == contact['lastname'] and new_raw[1] == contact['firstname']:
                 if contact['email'] == '':
                     contact['email'] = new_raw[6]
@@ -38,13 +38,13 @@ def sorter(source_path, folder_path):
             else:
                 trigger = 1
         if trigger == 1:
-            dict.append(
+            contact_dict.append(
                 {'lastname': new_raw[0], 'firstname': new_raw[1], 'surname': new_raw[2], 'organization': new_raw[3],
                  'position': new_raw[4], 'phone': new_raw[5], 'email': new_raw[6]})
         else:
             pass
 
-    for contact in dict:
+    for contact in contact_dict:
         result.append(
             [contact['lastname'], contact['firstname'], contact['surname'], contact['organization'],
              contact['position'],
