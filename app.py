@@ -11,12 +11,13 @@ def sorter(source_path, folder_path):
     dict = [{'lastname': 'lastname', 'firstname': 'firstname', 'surname': 'surname', 'organization': 'organization',
              'position': 'position', 'phone': 'phone', 'email': 'email'}]
 
-    # Не понял как перенести паттерн регулярного выражения, при переносе ломается
-    pattern = r"([А-Я]\w+).([А-Я]\w+).(([А-Я]\w+)|(,+)),+(([А-Яа-я]\w+)|),+(([^+78,a-zA-Z]+)|)(,+|)((\+7|8)?(\s|)(\(|)((?:\d{1,3}))(\)|)(\D|)((?:\d{1,3}))(\D|)((?:\d{1,2}))(\D|)((?:\d{1,2}))|)(\W|)((\(|)доб. (....)(\)|)|)(,|)((\w+(.|)\w+@\w+(.|).\w+(.|))|)"
+    pattern = r"([А-Я]\w+).([А-Я]\w+).(([А-Я]\w+)|(,+)),+(([А-Яа-я]\w+)|),+(([^+78,a-zA-Z]+)|)(,+|)((\+7|8)?(\s|)(\(|)" \
+              r"((?:\d{1,3}))(\)|)(\D|)((?:\d{1,3}))(\D|)((?:\d{1,2}))(\D|)((?:\d{1,2}))|)(\W|)((\(|)(доб.) (....)(\)|)|)(,|)" \
+              r"((\w+(.|)\w+@\w+(.|).\w+(.|))|)"
 
     for line in contacts_list:
         line_text = ",".join(line)
-        new_raw = re.sub(pattern, r"\1,\2,\4,\7,\9,+7(\15)\18-\20-\22 доб. \26,\30", line_text).split(',')
+        new_raw = re.sub(pattern, r"\1,\2,\4,\7,\9,+7(\15)\18-\20-\22 \26\27,\30", line_text).split(',')
 
         if new_raw[-2] == '+7()-- доб. ':
             new_raw[-2] = ''
@@ -49,6 +50,6 @@ def sorter(source_path, folder_path):
              contact['position'],
              contact['phone'], contact['email']])
 
-    with open(folder_path, "w", encoding="utf-8") as f:
+    with open(folder_path, "w", encoding="utf-8", newline='') as f:
         datawriter = csv.writer(f, delimiter=',')
         datawriter.writerows(result)
